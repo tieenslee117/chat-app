@@ -1,6 +1,7 @@
 //@ts-nocheck
 import setScreen from "../index.js";
 import loginScreen from "./login.js";
+import { register } from "../controllers/auth.js";
 // const registerScreen = `
 // <div class="d-flex align-items-center justify-content-center h-100">
 // <div class="card shadow">
@@ -38,7 +39,7 @@ const registerScreen = `
         <img src="img/background.svg" />
       </div>
       <div class="login-content">
-        <form action="index.html">
+        <form id="js-registerForm">
           <img src="img/avatar.svg" />
           <h2 class="title">Welcome</h2>
           <div class="input-div email">
@@ -84,10 +85,23 @@ const registerScreen = `
       </div>
     </div>
 `;
+
 function onload() {
   document.getElementById("js-btnMoveLogin").addEventListener("click", (e) => {
     e.preventDefault();
     setScreen(loginScreen);
+  });
+  const registerForm = document.getElementById("js-registerForm");
+  registerForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const userInput = {
+      email: registerForm.email.value,
+      name: registerForm.name.value,
+      password: registerForm.password.value,
+      password2: registerForm.password2.value,
+    };
+    const success = await register(userInput);
+    if (success) alert("Register successfully! Check your inbox!");
   });
 }
 export default {

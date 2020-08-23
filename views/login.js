@@ -1,5 +1,8 @@
+//@ts-nocheck
 import setScreen from "../index.js";
 import registerScreen from "./register.js";
+import chatScreen from "./chat.js";
+import { login } from "../controllers/auth.js";
 // const loginScreen = `
 // <div class="d-flex h-100 justify-content-center align-items-center">
 //     <div class="card shadow">
@@ -28,7 +31,7 @@ const loginScreen = `
         <img src="img/background.svg" />
       </div>
       <div class="login-content">
-        <form action="index.html">
+        <form id="js-loginForm">
           <img src="img/avatar.svg" />
           <h2 class="title">Welcome</h2>
           <div class="input-div one">
@@ -64,6 +67,21 @@ function onload() {
       e.preventDefault();
       setScreen(registerScreen);
     });
+
+  const loginForm = document.getElementById("js-loginForm");
+  loginForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const userInput = {
+      email: loginForm.email.value,
+      password: loginForm.password.value,
+    };
+    try {
+      const success = login(userInput);
+      if (success) setScreen(chatScreen);
+    } catch (err) {
+      alert(err.message);
+    }
+  });
 }
 
 export default {
