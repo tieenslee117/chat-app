@@ -41,14 +41,12 @@ function onload() {
 
     try {
       const success = await login(payload);
-      console.log(success);
       if (success) {
         alert("login success");
         setScreen(chatScreen);
       }
     } catch (err) {
-      console.log(err.message);
-      //   alert(err.message);
+      alert(err.message);
     }
   });
 }

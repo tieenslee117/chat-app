@@ -45,8 +45,12 @@ function onload() {
       password: form.password.value,
       retypePassword: form.retypePassword.value,
     };
-    const result = await register(userInput);
-    if (result) alert("Register successfully! Check your inbox!");
+    try {
+      const result = await register(userInput);
+      if (result) alert("Register successfully! Check your inbox!");
+    } catch (err) {
+      alert(err.message);
+    }
   });
 }
 export default {

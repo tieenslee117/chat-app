@@ -117,8 +117,8 @@ li.active {
 }
 
 .btn-primary {
-    background-color: #45ADA8;
-    color: #363636;
+    background-color: #53c9ec;
+    color: #000;
 }
 
 .no-bullet {
@@ -172,7 +172,7 @@ li.active {
 }
 
 .msg-primary {
-    background-color: #d0e1f9;
+    background-color: #53c9ec;
     color: white;
 }
 
@@ -205,5 +205,5 @@ li.active {
 .title {
     font-weight: bold;
     font-size: 30px;
-    color: #9DE0AD;
+    color: #53c9ec;
 }

@@ -9,7 +9,7 @@ import { subscribeListCon, activeCon } from "../models/chat.js";
 import { authedUser } from "../models/auth.js";
 const content = `
 <div class="d-flex h-100 w-100">
-        <div class=" flex-grow-1 card shadow md-only" id="js-listConPanel">
+        <div class=" flex-grow-1 card shadow md-only scroll" id="js-listConPanel">
             <form id="js-formCreateCon" class="form-inline">
                         <div class="form-group">
                             <input type="text" id="txtConName" placeholder="Create a conversation" class="w-100 form-control">
@@ -64,15 +64,20 @@ function onload() {
   formCreateCon.addEventListener("submit", function (event) {
     event.preventDefault();
     const name = formCreateCon.txtConName.value;
-    createCon(name);
+    try {
+      const success = createCon(name);
+    } catch (err) {
+      alert(err.message);
+    }
   });
   const formChat = document.getElementById("js-chatForm");
   formChat.addEventListener("submit", function (event) {
     event.preventDefault();
     try {
       sendMsg(formChat.message.value);
+      formChat.message.value = "";
     } catch (err) {
-      alert(err);
+      alert(err.message);
     }
   });
   const formInvite = document.getElementById("js-inviteForm");
@@ -82,7 +87,7 @@ function onload() {
     try {
       invite(email);
     } catch (err) {
-      alert(err);
+      alert(err.message);
     }
   });
 }

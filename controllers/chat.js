@@ -3,12 +3,19 @@ import { authedUser } from "../models/auth.js";
 import { changeActiveCon, activeCon } from "../models/chat.js";
 
 function createCon(name) {
+  if (name.length <= 0) {
+    throw new Error(`Conversation's name can't be empty!`);
+  } else if (name.length >= 30) {
+    throw new Error(`Conversation's name too long!`);
+  }
+
   db.collection("conversations")
     .doc()
     .set({
       name: name,
       list_member: [authedUser],
     });
+  return true;
 }
 
 function updateActiveCon(nextConId) {
