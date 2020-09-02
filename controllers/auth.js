@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+import { updateAuthedUser } from "../models/auth.js";
+
 async function register(userInput) {
   for (let key in userInput) {
     if (userInput[key].length === 0) {
@@ -26,7 +28,8 @@ async function login(userInput) {
   if (!loginResult.user.emailVerified) {
     throw new Error("User is not verified! Please check your inbox!");
   }
-  //   updateAuthedUser(login.user.email);
+  console.log(loginResult.user.email);
+  updateAuthedUser(loginResult.user.email);
   return true;
 }
 
