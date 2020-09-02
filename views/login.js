@@ -1,89 +1,57 @@
 //@ts-nocheck
-import setScreen from "../index.js";
 import registerScreen from "./register.js";
-import chatScreen from "./chat.js";
+import setScreen from "../index.js";
 import { login } from "../controllers/auth.js";
-// const loginScreen = `
-// <div class="d-flex h-100 justify-content-center align-items-center">
-//     <div class="card shadow">
-//         <div class="text-center">Login</div>
-//         <form id="js-formLogin">
-//         <div class="form-group">
-//             <label for="email">Email</label>
-//             <input type="email" id="email" class="form-control">
-//         </div>
-//         <div class="form-group">
-//             <label for="password">Password</label>
-//             <input type="password" id="password" class="form-control">
-//         </div>
-//         <div class="form-group">
-//             <button type="submit" class="btn btn-primary">Login</button>
-//             <button type="button" class="btn btn-primary" id="js-btnBackToRegister">Back to Register</button>
-//         </div>
-//         </form>
-//     </div>
-// </div>
-// `;
+import chatScreen from "./chat.js";
 const loginScreen = `
-<img class="wave" src="img/wave.png" />
-    <div class="container">
-      <div class="img">
-        <img src="img/background.svg" />
-      </div>
-      <div class="login-content">
-        <form id="js-loginForm">
-          <img src="img/avatar.svg" />
-          <h2 class="title">Welcome</h2>
-          <div class="input-div one">
-            <div class="i">
-              <i class="fas fa-user"></i>
-            </div>
-            <div class="div">
-              <h5>Email</h5>
-              <input type="text" class="input" id="email" required/>
-            </div>
-          </div>
-          <div class="input-div pass">
-            <div class="i">
-              <i class="fas fa-lock"></i>
-            </div>
-            <div class="div">
-              <h5>Password</h5>
-              <input type="password" class="input" id="password" required/>
-            </div>
-          </div>
-          <a href="" id="js-btnMoveRegister">Register</a>
-          <button type="submit" class="btn">Login</button>
+<div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="card card-form shadow">
+        <div class="text-center title">Login</div>
+        <form id="js-formLogin">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="button" class="btn btn-primary" id="js-btnBackToRegister">Back to Register</button>
+        </div>
         </form>
-      </div>
     </div>
-    <script type="text/javascript" src="script.js"></script>
+</div>
 `;
-
 function onload() {
   document
-    .getElementById("js-btnMoveRegister")
-    .addEventListener("click", (e) => {
-      e.preventDefault();
+    .getElementById("js-btnBackToRegister")
+    .addEventListener("click", () => {
       setScreen(registerScreen);
     });
-
-  const loginForm = document.getElementById("js-loginForm");
-  loginForm.addEventListener("submit", (event) => {
+  const formLogin = document.getElementById("js-formLogin");
+  console.log(formLogin);
+  formLogin.addEventListener("submit", async function (event) {
     event.preventDefault();
-    const userInput = {
-      email: loginForm.email.value,
-      password: loginForm.password.value,
-    };
+    const email = formLogin.email.value;
+    const password = formLogin.password.value;
+
+    const payload = { email: email, password: password };
+
     try {
-      const success = login(userInput);
-      if (success) setScreen(chatScreen);
+      const success = await login(payload);
+      console.log(success);
+      if (success) {
+        alert("login success");
+        setScreen(chatScreen);
+      }
     } catch (err) {
-      alert(err.message);
+      console.log(err.message);
+      //   alert(err.message);
     }
   });
 }
-
 export default {
   content: loginScreen,
   onload: onload,

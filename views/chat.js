@@ -20,7 +20,7 @@ const content = `
             </form>
             <ul id="js-ListCon" class="no-bullet"></ul>
         </div>
-        <div class=" flex-grow-4 d-flex column">
+        <div class=" flex-grow-4 d-flex column card">
                 <div class="p-12 bg-primary">
                     <button class="btn btn-primary md-only-visible" id="js-btnShowListCon">Show</button>
                     <span id="js-conTitle"></span>
@@ -40,11 +40,11 @@ const content = `
                                 </div>
                         </form>
                     </div>
-                    <div class=" flex-grow-1">
+                    <div class=" flex-grow-1 card">
                     <form id="js-inviteForm" class="form-inline">
                         
                                 <div class="form-group">
-                                    <input type="text" id="email" placeholder="Invite someone" class="w-100 form-control">
+                                    <input type="text" id="email" placeholder="Enter email to add" class="w-100 form-control">
                                 </div>
                                 <div class="form-group no-grow">
                                     <button class="btn btn-primary">Add</button>
