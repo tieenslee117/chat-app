@@ -44,7 +44,7 @@ const content = `
                     <form id="js-inviteForm" class="form-inline">
                         
                                 <div class="form-group">
-                                    <input type="text" id="email" placeholder="Enter email to add" class="w-100 form-control">
+                                    <input type="email" id="email" placeholder="Enter email to add" class="w-100 form-control">
                                 </div>
                                 <div class="form-group no-grow">
                                     <button class="btn btn-primary">Add</button>
@@ -66,6 +66,7 @@ function onload() {
     const name = formCreateCon.txtConName.value;
     try {
       const success = createCon(name);
+      formCreateCon.txtConName.value = "";
     } catch (err) {
       alert(err.message);
     }
@@ -86,6 +87,7 @@ function onload() {
     const email = formInvite.email.value;
     try {
       invite(email);
+      formInvite.email.value = "";
     } catch (err) {
       alert(err.message);
     }
@@ -95,7 +97,6 @@ function onload() {
 function onConsChanges(cons) {
   const listCon = document.getElementById("js-ListCon");
   listCon.innerHTML = "";
-  console.log(cons);
   cons.forEach((con) => {
     const conLi = document.createElement("li");
     conLi.innerHTML = con.name;

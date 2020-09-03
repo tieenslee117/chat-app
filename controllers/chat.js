@@ -44,7 +44,6 @@ function invite(email) {
   if (!activeCon) {
     throw new Error("Choose a conversation!!!");
   }
-  console.log(activeCon);
   db.collection("conversations")
     .doc(activeCon)
     .update({

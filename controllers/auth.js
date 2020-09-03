@@ -28,7 +28,6 @@ async function login(userInput) {
   if (!loginResult.user.emailVerified) {
     throw new Error("User is not verified! Please check your inbox!");
   }
-  console.log(loginResult.user.email);
   updateAuthedUser(loginResult.user.email);
   return true;
 }

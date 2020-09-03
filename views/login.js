@@ -31,7 +31,6 @@ function onload() {
       setScreen(registerScreen);
     });
   const formLogin = document.getElementById("js-formLogin");
-  console.log(formLogin);
   formLogin.addEventListener("submit", async function (event) {
     event.preventDefault();
     const email = formLogin.email.value;
